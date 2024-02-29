@@ -1,0 +1,202 @@
+package lista.de.estudiantes;
+import java.util.Scanner;
+
+public class ListaEstudiantes {
+
+    public static void main(String[] args) {
+                
+       String menu = "\t\t\t**** Bienvenido a Registro de Estudiantes *****\n"
+                + "Ingresa una opción: \n"
+                + "\t1.- Agregar Estudiante\n"
+                + "\t2.- Buscar Estudiante\n"
+                + "\t3.- Lista de estudiantes\n"
+                + "\t4.- Editar Estudiante\n"
+                + "\t5.- Salir";
+
+    Scanner sc = new Scanner(System.in); // Crear clase escaner
+    int opcion; // Declara una variable para la opciones
+    Estudiante[] estudiantes = new Estudiante[50]; // Vector de tipo Estudiante con capacidad de 50 elementos
+    int contador = 0; // Crear variable para el conteo de los estudiantes
+    do{
+        System.out.println(menu); // Muestra el menu
+        opcion = sc.nextInt(); // Seleccionar opcion
+        switch(opcion){ // Usar swhich para comprarar cada 
+            case 1:
+                System.out.println("Ingrese el codigo de seguridad");
+                // Codigo de seguridad 
+                if(contador < 50){ // Verificar los espacios del contador
+                    System.out.println("Ingrese el nombre del estudiante");
+                    String nombre = sc.next(); // Lees el nombre del estudiante
+                    System.out.println("Ingrese el apellido del estudiante");
+                    String apellido = sc.next(); // Lees el apellido del estudiante
+                    System.out.println("Ingrese la cédula del estudiante");
+                    String cedula = sc.next(); // Lees la cédula del estudiante
+                    System.out.println("Ingrese el curso del estudiante");
+                    String curso = sc.next(); // Lees el curso del estudiante
+                    System.out.println("Ingrese el paralelo del estudiante");
+                    String paralelo = sc.next(); // Lees el paralelo del estudiante
+                    System.out.println("Ingrese la edad del estudiante");
+                    int edad = sc.nextInt(); // Lees la edad del estudiante
+                    System.out.println("Ingrese la dirección del estudiante");
+                    String direccion = sc.next(); // Lees la dirección del estudiante
+                    System.out.println("Ingrese el teléfono del estudiante");
+                    String telefono = sc.next(); // Lees el teléfono del estudiante
+                    Estudiante e = new Estudiante(nombre, apellido, cedula, curso, paralelo, edad, direccion, telefono); // Creas un objeto de la clase Estudiante con los datos ingresados
+                    estudiantes[contador] = e; // Insertas el objeto en el vector en la posición indicada por el contador
+                    contador++; // Incrementas el contador
+                    System.out.println("Estudiante agregado con éxito");
+                }else{ // Si no hay espacio en el vector
+                    System.out.println("No se pueden agregar más estudiantes");
+                }
+                break; // Usas break para salir del switch
+            case 2: 
+                  System.out.println("Ingrese el numero de cedula");
+                  String cedula = sc.next(); // lee el c.i
+                  boolean encontrado = false; // Declara una variable para indicar si se encontró el estudiante
+                  for(int i = 0; i < contador; i++){ // Usas un bucle for para recorrer el vector de estudiantes
+                      Estudiante e = estudiantes[i]; // Obtienes el objeto de la clase Estudiante en la posición i
+                      if (e.getCedula ().equals (cedula)) { // Comparas los apellidos y nombres ingresados con los atributos del objeto
+                      encontrado = true; // Cambias el valor de la variable a true
+                      System.out.println("Estudiante encontrado");
+                      System.out.println("Nombres: " + e.getNombre());
+                      System.out.println("Apellidos: " + e.getApellido());// Muestras un mensaje
+                      System.out.println("Cédula: " + e.getCedula()); // Muestras la cédula del estudiante
+                      System.out.println("Curso: " + e.getCurso()); // Muestras el curso del estudiante
+                      System.out.println("Paralelo: " + e.getParalelo()); // Muestras el paralelo del estudiante
+                      System.out.println("Edad: " + e.getEdad()); // Muestras la edad del estudiante
+                      System.out.println("Dirección: " + e.getDireccion()); // Muestras la dirección del estudiante
+                      System.out.println("Teléfono: " + e.getTelefono()); // Muestras el teléfono del estudiante
+                          break; // Usas break para salir del bucle
+     }
+    }
+                     if(!encontrado){ // Si no se encontró el estudiante
+                     System.out.println("No se encontró ningún estudiante con esos apellidos y nombres"); // Muestras un mensaje
+    }
+    break;
+            case 3: 
+                     System.out.println("Ingrese el curso");
+                     String curso = sc.next(); // Lees el curso
+                     boolean hayEstudiantes = false; // Declara una variable para indicar si hay estudiantes en el curso
+                     System.out.println("Lista de estudiantes del curso " + curso); // Muestras el título de la lista
+                     for(int i = 0; i < contador; i++){ // Usas un bucle for para recorrer el vector de estudiantes
+                         Estudiante e = estudiantes[i]; // Obtienes el objeto de la clase Estudiante en la posición i
+                         if(e.getCurso().equals(curso)){ // Comparas el curso ingresado con el atributo del objeto
+                          hayEstudiantes = true; // Cambias el valor de la variable a true
+                          System.out.println("Apellidos y nombres: " + e.getApellido() + " " + e.getNombre()); // Muestras los apellidos y nombres del estudiante
+                          System.out.println("Cédula: " + e.getCedula()); // Muestras la cédula del estudiante
+                          System.out.println("Paralelo: " + e.getParalelo()); // Muestras el paralelo del estudiante
+                          System.out.println("Edad: " + e.getEdad()); // Muestras la edad del estudiante
+                          System.out.println("Dirección: " + e.getDireccion()); // Muestras la dirección del estudiante
+                          System.out.println("Teléfono: " + e.getTelefono()); // Muestras el teléfono del estudiante
+                          System.out.println("----------------------------------------"); // Muestras una línea separadora
+        }
+    }
+                          if(!hayEstudiantes){ // Si no hay estudiantes en el curso
+                          System.out.println("No hay estudiantes registrados en el curso " + curso); // Muestras un mensaje
+    }
+    break;
+            case 4:
+    break; 
+            case 5:
+                System.out.println("Saliendo del programa");
+                break;
+            default: // Usas default para manejar las opciones inválidas
+                System.out.println("Opción no válida. Intente de nuevo.");
+        }
+    }while(opcion != 5); // Usas un while para repetir el menú hasta que se elija la opción 5
+    sc.close(); // Cierras el escáner
+    }  
+}
+
+// Esta es la clase Estudiante que tiene los atributos que solicitaste
+class Estudiante{
+    // Declara los atributos de la clase
+    private String nombre;
+    private String apellido;
+    private String cedula;
+    private String curso;
+    private String paralelo;
+    private int edad;
+    private String direccion;
+    private String telefono;
+
+    // Crea el constructor de la clase que recibe los parámetros
+    public Estudiante(String nombre, String apellido, String cedula, String curso, String paralelo, int edad, String direccion, String telefono){
+        // Asigna los valores de los parámetros a los atributos de la clase
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.cedula = cedula;
+        this.curso = curso;
+        this.paralelo = paralelo;
+        this.edad = edad;
+        this.direccion = direccion;
+        this.telefono = telefono;
+    }
+
+    // Crea los métodos get y set para cada atributo
+    public String getNombre(){
+        return nombre;
+    }
+
+    public void setNombre(String nombre){
+        this.nombre = nombre;
+    }
+
+    public String getApellido(){
+        return apellido;
+    }
+
+    public void setApellido(String apellido){
+        this.apellido = apellido;
+    }
+
+    public String getCedula(){
+        return cedula;
+    }
+
+    public void setCedula(String cedula){
+        this.cedula = cedula;
+    }
+
+    public String getCurso(){
+        return curso;
+    }
+
+    public void setCurso(String curso){
+        this.curso = curso;
+    }
+
+    public String getParalelo(){
+        return paralelo;
+    }
+
+    public void setParalelo(String paralelo){
+        this.paralelo = paralelo;
+    }
+
+    public int getEdad(){
+        return edad;
+    }
+
+    public void setEdad(int edad){
+        this.edad = edad;
+    }
+
+    public String getDireccion(){
+        return direccion;
+    }
+
+    public void setDireccion(String direccion){
+        this.direccion = direccion;
+    }
+
+    public String getTelefono(){
+        return telefono;
+    }
+
+    public void setTelefono(String telefono){
+        this.telefono = telefono;
+    }
+
+    
+}
